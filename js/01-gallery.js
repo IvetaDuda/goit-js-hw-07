@@ -26,11 +26,10 @@ function openModalGallery(event) {
     return;
   }
 
-  const instance = basicLightbox
-    .create(
-      `<img src=${event.target.dataset.source} width="800" height="600" alt=${event.target.alt}>`
-    )
-    .show();
+  const instance = basicLightbox.create(
+    `<img src=${event.target.dataset.source} width="800" height="600" alt=${event.target.alt}>`
+  );
+  instance.show();
 
   galleryContainerEl.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
