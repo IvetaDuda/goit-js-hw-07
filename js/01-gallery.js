@@ -30,14 +30,21 @@ function openModalGallery(event) {
   }
 
   const instance = basicLightbox.create(
-    `<img src=${event.target.dataset.source} width="800" height="600" alt=${event.target.alt}>`
+    `<img src=${event.target.dataset.source} width="800" height="600" alt=${event.target.alt}>`,
+    {
+      onShow: (instance) => {
+        window.addEventListener('keydown', galleryEscKey);
+      },
+      onClose: (instance) => {
+        window.removeEventListener('keydown', galleryEscKey);
+      },
+    }
   );
   instance.show();
-
-  galleryContainerEl.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') {
+  function galleryEscKey() {
+    if (event.key === 'Escape') {
       return;
     }
     instance.close();
-  });
+  }
 }
