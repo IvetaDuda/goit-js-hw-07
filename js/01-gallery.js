@@ -2,7 +2,10 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 const galleryContainerEl = document.querySelector('.gallery');
-
+galleryContainerEl.insertAdjacentHTML(
+  'beforeend',
+  galleryItemsEl(galleryItems)
+);
 function galleryItemsEl(list) {
   return list
     .map(
@@ -32,13 +35,9 @@ function openModalGallery(event) {
   instance.show();
 
   galleryContainerEl.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      instance.close();
+    if (event.key !== 'Escape') {
+      return;
     }
+    instance.close();
   });
 }
-
-galleryContainerEl.insertAdjacentHTML(
-  'beforeend',
-  galleryItemsEl(galleryItems)
-);
